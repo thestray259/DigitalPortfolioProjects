@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8dd3d890f468149b21e769d770f6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 4994939262322527622}
-  playerObject: {fileID: 4994939262322527616}
+  playerTransform: {fileID: 2387872974077832901, guid: eedd76b6088100b499fd38e420972946, type: 3}
+  playerObject: {fileID: 2387872974077832902, guid: eedd76b6088100b499fd38e420972946, type: 3}
 --- !u!114 &8742818813515513711
 MonoBehaviour:
   m_ObjectHideFlags: 0

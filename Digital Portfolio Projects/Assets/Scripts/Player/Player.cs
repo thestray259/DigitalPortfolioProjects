@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 
     private void Move(Transform view)
     {
-        Vector3 forward = view.forward;
+        Vector3 forward = gameObject.transform.forward;
         forward.y = 0; 
 
         // check if punch anim is playing, if not then can move, if so then can't move 

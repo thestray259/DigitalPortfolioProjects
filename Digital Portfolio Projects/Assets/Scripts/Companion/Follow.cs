@@ -24,12 +24,12 @@ public class Follow : Node
         Debug.Log("Companion entered Follow");
         if (Vector3.Distance(transform.position, playerTransform.position) > 3.0f)
         {
-            animator.SetBool("walking", true); 
+            animator.SetBool("walking", true);
             // change so that comp picks a position behind player to move towards
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, CompanionBT.speed * Time.deltaTime);
-            transform.LookAt(playerTransform.position); 
+            transform.LookAt(playerTransform.position);
         }
-        else animator.SetBool("walking", false); 
+        else { animator.SetBool("walking", false); }
 
         state = NodeState.RUNNING;
         return state; 

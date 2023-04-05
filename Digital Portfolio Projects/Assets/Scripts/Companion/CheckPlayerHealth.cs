@@ -28,6 +28,7 @@ public class CheckPlayerHealth : Node
 
         if (playerObject.GetComponent<Health>().health <= 50)
         {
+            Debug.Log("Companion is Healing Player");
             CompanionBT.healTimer = 5.0f; 
             state = NodeState.SUCCESS;
             return state; 
