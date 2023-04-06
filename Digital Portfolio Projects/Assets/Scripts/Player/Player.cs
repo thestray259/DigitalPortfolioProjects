@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         direction.x = Input.GetAxis("Horizontal");
         direction.z = Input.GetAxis("Vertical");
         direction = Vector3.ClampMagnitude(direction, 1);
-
+        
         // convert direction from world space to view space
         Quaternion viewSpace = Quaternion.AngleAxis(view.rotation.eulerAngles.y, Vector3.up);
         direction = viewSpace * direction;
@@ -73,8 +73,12 @@ public class Player : MonoBehaviour
 
     private void Move(Transform view)
     {
-        Vector3 forward = gameObject.transform.forward;
-        forward.y = 0; 
+        Vector3 forward = view.transform.forward;
+        Vector3 right = view.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
 
         // check if punch anim is playing, if not then can move, if so then can't move 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
@@ -88,7 +92,7 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 // move left 
-                transform.position += speed * Time.deltaTime * -view.right;
+                transform.position += speed * Time.deltaTime * -right;
             }
 
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -100,7 +104,7 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 // move right 
-                transform.position += speed * Time.deltaTime * view.right;
+                transform.position += speed * Time.deltaTime * right;
             }
         }
 
