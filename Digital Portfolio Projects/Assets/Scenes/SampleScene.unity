@@ -434,6 +434,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &1147492680 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4521270575261735322, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
+  m_PrefabInstance: {fileID: 4521270575094037636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1220629673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,6 +446,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 903097218376734300, guid: fc8212a6847400745823990f15b5a645, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4994939262322527616, guid: fc8212a6847400745823990f15b5a645, type: 3}
       propertyPath: m_Name
       value: Companion
@@ -492,13 +501,18 @@ PrefabInstance:
     - target: {fileID: 8388356688166073937, guid: fc8212a6847400745823990f15b5a645, type: 3}
       propertyPath: playerObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1657644962}
     - target: {fileID: 8388356688166073937, guid: fc8212a6847400745823990f15b5a645, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1147492680}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8212a6847400745823990f15b5a645, type: 3}
+--- !u!1 &1657644962 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3638818835772806110, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
+  m_PrefabInstance: {fileID: 4521270575094037636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4521270575094037636
 PrefabInstance:
   m_ObjectHideFlags: 0
