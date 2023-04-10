@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
     [SerializeField] Transform view;
     [SerializeField] Transform lookAt; 
