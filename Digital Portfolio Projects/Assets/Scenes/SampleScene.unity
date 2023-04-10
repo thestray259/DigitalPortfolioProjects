@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5df7e8679800e4a419598cb427d4bff6, type: 2}
+  - {fileID: 2100000, guid: 8e5513e08e0a42c408e16e1bc5175ea6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -475,6 +475,14 @@ PrefabInstance:
       propertyPath: health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3005919780695247980, guid: fc8212a6847400745823990f15b5a645, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005919780695247980, guid: fc8212a6847400745823990f15b5a645, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4994939262322527616, guid: fc8212a6847400745823990f15b5a645, type: 3}
       propertyPath: m_Name
       value: Companion
@@ -542,67 +550,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7875992317676165642, guid: fc8212a6847400745823990f15b5a645, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc8212a6847400745823990f15b5a645, type: 3}
---- !u!1001 &1243471658
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1147492680}
-    m_Modifications:
-    - target: {fileID: 1000010547497730, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_Name
-      value: FoliageBender
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010547497730, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010368281114, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4499464748f34274fa370f5c95eb83d3, type: 3}
 --- !u!1 &1657644962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3638818835772806110, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
@@ -620,6 +567,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1019064620004672938, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
+      propertyPath: m_Name
+      value: FoliageBender
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511019704551289243, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638818835772806110, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4122059056108882276, guid: 19540e4b5ae48e3459800df2675b8ae0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

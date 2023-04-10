@@ -35,7 +35,7 @@ public class TaskFollow : Node
             destSet = true;
         }
 
-        if (Vector3.Distance(destination, playerTransform.position) >= 3.0f && destSet == true)
+        if (Vector3.Distance(transform.position, playerTransform.position) >= 3.0f && destSet == true)
         {
             animator.SetBool("walking", true);
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
