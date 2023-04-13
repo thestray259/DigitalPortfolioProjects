@@ -5,6 +5,7 @@ public class CompanionBT : BTree
 {
     public UnityEngine.Transform playerTransform;
     public UnityEngine.GameObject playerObject; 
+    public UnityEngine.Rigidbody rb;
 
     public static float speed = 5.0f;
     public static float fovRange = 6f;
@@ -35,7 +36,7 @@ public class CompanionBT : BTree
             new Sequence(new List<Node>
             {
                 new CheckCanFollow(transform, playerObject),
-                new TaskFollow(transform, playerTransform)
+                new TaskFollow(transform, playerTransform, rb)
             })            
         });
 
