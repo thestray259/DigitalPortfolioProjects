@@ -36,7 +36,7 @@ public class CompanionBT : BTree
             new Sequence(new List<Node>
             {
                 new CheckCanFollow(transform, playerObject),
-                new TaskFollow(transform, playerTransform, rb)
+                new TaskFollow(transform, playerTransform)
             })            
         });
 
