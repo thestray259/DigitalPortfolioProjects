@@ -7,13 +7,13 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Transform view;
     [SerializeField] Transform lookAt; 
-    [SerializeField] float speed;
-    [SerializeField] float jumpForce;
-    [SerializeField] float turnRate;
-    [SerializeField] float attackDistance;
-    [SerializeField] float damage; 
+    [SerializeField] float speed = 5;
+    [SerializeField] float jumpForce = 5;
+    [SerializeField] float turnRate = 100;
+    [SerializeField] float attackDistance = 2;
+    [SerializeField] float damage = 10; 
     [SerializeField] ForceMode forceMode;
-    [SerializeField] string tagName;
+    [SerializeField] string tagName = "Enemy";
     
     Rigidbody rb;
     Vector3 force = Vector3.zero; 

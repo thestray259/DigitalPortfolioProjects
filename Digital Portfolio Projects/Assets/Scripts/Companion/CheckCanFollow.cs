@@ -17,13 +17,13 @@ public class CheckCanFollow : Node
         Debug.Log("Companion entered CheckCanFollow"); 
         if (playerObject.GetComponent<Player>().canFollow == true)
         {
-            Debug.Log("Can Follow = true");
+            //Debug.Log("Can Follow = true");
                 
             state = NodeState.SUCCESS;
             return state; 
         }
 
-        Debug.Log("Can Follow = false"); 
+        //Debug.Log("Can Follow = false"); 
         state = NodeState.FAILURE;
         return state; 
     }
