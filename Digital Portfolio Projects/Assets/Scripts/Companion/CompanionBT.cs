@@ -33,7 +33,7 @@ public class CompanionBT : BTree
                 new CheckForEnemy(transform),
                 new TaskGoToEnemy(transform)
             }),
-            new Sequence (new List<Node>
+            new Sequence(new List<Node>
             {
                 new CheckCanIdle(transform, playerObject),
                 new TaskIdle(transform, playerObject)

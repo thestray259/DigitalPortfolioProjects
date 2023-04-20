@@ -7,19 +7,28 @@ public class CheckCanIdle : Node
 {
     Transform transform;
     private UnityEngine.GameObject playerObject;
+    Animator animator;
 
     public CheckCanIdle(Transform transform, GameObject playerObject)
     {
         this.transform = transform;
         this.playerObject = playerObject;
+        this.animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
     {
         Debug.Log("Companion entered CheckCanIdle");
-        // do check here, if can return success, else return failure
-
-        state = NodeState.FAILURE;
-        return state;
+        // if moving, return failure, else return success
+        if (animator.GetBool("walking") == true || animator.GetBool("running") == true)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
+        else
+        {
+            state = NodeState.SUCCESS;
+            return state;
+        }
     }
 }
