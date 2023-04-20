@@ -33,11 +33,16 @@ public class CompanionBT : BTree
                 new CheckForEnemy(transform),
                 new TaskGoToEnemy(transform)
             }),
+            new Sequence (new List<Node>
+            {
+                new CheckCanIdle(transform, playerObject),
+                new TaskIdle(transform, playerObject)
+            }),
             new Sequence(new List<Node>
             {
                 new CheckCanFollow(transform, playerObject),
                 new TaskFollow(transform, playerTransform)
-            })            
+            })
         });
 
         return root; 

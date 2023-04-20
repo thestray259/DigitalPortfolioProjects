@@ -18,7 +18,7 @@ public class TaskFollow : Node
     Vector3 offset = new Vector3(0.1f, 0.1f, 0.1f);
     Vector3 forward = new Vector3();
     Quaternion rotation = Quaternion.identity;
-    Vector3 distance = new Vector3();
+    float distance;
 
     private Animator animator;
 
@@ -31,11 +31,9 @@ public class TaskFollow : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered Follow");
-        //Debug.Log("Walking Bool: " + animator.GetBool("walking"));
-        //Debug.Log("Distance from Player: " + Vector3.Distance(transform.position, playerTransform.position));
-        //Debug.Log("destSet = " + destSet);
-        if (destSet == false && Vector3.Distance(transform.position, playerTransform.position) > 3.0f)
+        Debug.Log("Companion entered TaskFollow");
+        distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (destSet == false && distance > 3.0f)
         {
             transform.LookAt(playerTransform.position);
             rotation = Quaternion.AngleAxis(Random.Range(-10, 10), Vector3.up);
@@ -45,22 +43,33 @@ public class TaskFollow : Node
             destination.y = transform.position.y;
             destMin = destination - offset;
             destMax = destination + offset;
-            Debug.Log("First Destination: " + destination);
             destSet = true;
-            //Debug.Log("(First Destination) destSet = " + destSet);
         }
         
-        if (destSet == true && Vector3.Distance(transform.position, playerTransform.position) >= 3.0f)
+        if (destSet == true && distance >= 3.0f)
         {
-            animator.SetBool("walking", true);
+            if (distance >= 5) CompanionBT.speed *= 2;
+            else CompanionBT.speed = 5;
+
+            if (CompanionBT.speed == 5)
+            {
+                animator.SetBool("walking", true);
+                animator.SetBool("running", false);
+            }
+            else if (CompanionBT.speed > 5)
+            {
+                animator.SetBool("walking", false);
+                animator.SetBool("running", true);
+            }
+
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
             transform.LookAt(destination);
-            Debug.Log("Walking to " + destination);
             Debug.DrawLine(transform.position, destination, color:Color.red);
+
             if (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
                  transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
                  transform.position.z >= destMin.z && transform.position.z <= destMax.z)
-            { animator.SetBool("walking", false); destSet = false; Debug.Log("Walking stopped"); }
+            { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; }
             else if (Vector3.Distance(destination, playerTransform.position) > 3.8f)
             {
                 transform.LookAt(playerTransform.position);
@@ -72,15 +81,14 @@ public class TaskFollow : Node
                 destMin = destination - offset;
                 destMax = destination + offset;
                 destSet = true;
-                Debug.Log("Reset Destination in First: " + destination);
-                //Debug.Log("(Reset Destination) destSet = " + destSet);
                 Debug.DrawLine(transform.position, destination);
-                animator.SetBool("walking", true);
+                if (CompanionBT.speed == 5) animator.SetBool("walking", true);
+                else if (CompanionBT.speed > 5) animator.SetBool("running", true);
                 transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
                 transform.LookAt(destination);
             }
         }
-        else { animator.SetBool("walking", false); destSet = false; Debug.Log("Following else"); }
+        else { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; Debug.Log("Following else"); }
 
         state = NodeState.RUNNING;
         return state; 
