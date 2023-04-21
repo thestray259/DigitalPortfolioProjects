@@ -17,7 +17,7 @@ public class CheckPlayerHealth : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered CheckPlayerHealth"); 
+        //Debug.Log("Companion entered CheckPlayerHealth");
         // check if player health is below a certain point/percentage 
         // if yes, return success 
         // else return failure 

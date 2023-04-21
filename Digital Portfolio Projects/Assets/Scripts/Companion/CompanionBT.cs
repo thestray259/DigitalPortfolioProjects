@@ -35,13 +35,13 @@ public class CompanionBT : BTree
             }),
             new Sequence(new List<Node>
             {
-                new CheckCanIdle(transform, playerObject),
-                new TaskIdle(transform, playerObject)
+                new CheckCanFollow(transform, playerObject),
+                new TaskFollow(transform, playerTransform)
             }),
             new Sequence(new List<Node>
             {
-                new CheckCanFollow(transform, playerObject),
-                new TaskFollow(transform, playerTransform)
+                new CheckCanIdle(transform, playerObject),
+                new TaskIdle(transform, playerObject)
             })
         });
 

@@ -12,19 +12,19 @@ public class CheckCanHeal : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered CheckCanHeal"); 
+        //Debug.Log("Companion entered CheckCanHeal"); 
         // check healTimer 
         // if <= 0, then success 
         // else fail 
 
         if (CompanionBT.healTimer <= 0f)
         {
-            Debug.Log("CheckCanHeal Success"); 
+            //Debug.Log("CheckCanHeal Success"); 
             state = NodeState.SUCCESS;
             return state; 
         }
 
-        Debug.Log("CheckCanHeal Failure"); 
+        //Debug.Log("CheckCanHeal Failure"); 
         CompanionBT.healTimer -= Time.deltaTime;
         Debug.Log("healTimer: " + CompanionBT.healTimer); 
 

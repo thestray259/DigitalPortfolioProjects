@@ -14,16 +14,17 @@ public class CheckCanFollow : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered CheckCanFollow"); 
-        if (playerObject.GetComponent<Player>().canFollow == true)
+        Debug.Log("Companion entered CheckCanFollow");
+        var playerTransform = playerObject.GetComponent<Transform>();
+        var distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (playerObject.GetComponent<Player>().canFollow == true && distance >= 3f)
         {
-            //Debug.Log("Can Follow = true");
-                
+            Debug.Log("Can Follow = true");                
             state = NodeState.SUCCESS;
             return state; 
         }
 
-        //Debug.Log("Can Follow = false"); 
+        Debug.Log("Can Follow = false"); 
         state = NodeState.FAILURE;
         return state; 
     }

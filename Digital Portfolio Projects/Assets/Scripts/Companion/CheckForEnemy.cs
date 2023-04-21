@@ -14,7 +14,7 @@ public class CheckForEnemy : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered CheckForEnemy");
+        //Debug.Log("Companion entered CheckForEnemy");
         object t = GetData("target"); 
         if (t == null)
         {

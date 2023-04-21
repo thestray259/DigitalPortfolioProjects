@@ -19,16 +19,11 @@ public class CheckCanIdle : Node
     public override NodeState Evaluate()
     {
         Debug.Log("Companion entered CheckCanIdle");
-        // if moving, return failure, else return success
-        if (animator.GetBool("walking") == true || animator.GetBool("running") == true)
-        {
-            state = NodeState.FAILURE;
-            return state;
-        }
-        else
-        {
-            state = NodeState.FAILURE;
-            return state;
-        }
+        animator.SetBool("walking", false);
+        animator.SetBool("running", false);
+
+        Debug.Log("Idle Success");
+        state = NodeState.SUCCESS;
+        return state;
     }
 }

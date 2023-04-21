@@ -12,7 +12,7 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Companion entered CheckEnemyInAttackRange");
+        //Debug.Log("Companion entered CheckEnemyInAttackRange");
         object t = GetData("target"); 
         if (t == null)
         {
