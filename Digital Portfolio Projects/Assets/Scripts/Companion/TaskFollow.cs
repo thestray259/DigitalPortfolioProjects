@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-
 using BehaviorTree;
-using Unity.VisualScripting;
-using static Unity.VisualScripting.Member;
 
 public class TaskFollow : Node
 {
@@ -15,12 +11,13 @@ public class TaskFollow : Node
     Vector3 destination = new Vector3();
     Vector3 destMin = new Vector3();
     Vector3 destMax = new Vector3();
-    Vector3 offset = new Vector3(0.1f, 0.1f, 0.1f);
+    Vector3 offset = new Vector3(0.05f, 0.05f, 0.05f);
     Vector3 forward = new Vector3();
     Quaternion rotation = Quaternion.identity;
     float distance;
     float timer = 3.0f;
     bool timerRunning = false;
+    bool idleDestSet = false;
 
     private Animator animator;
 
@@ -34,6 +31,7 @@ public class TaskFollow : Node
     public override NodeState Evaluate()
     {
         Debug.Log("Companion entered TaskFollow");
+        Debug.Log("timerRunning: " + timerRunning);
         distance = Vector3.Distance(transform.position, playerTransform.position);
         if (destSet == false && distance > 3.0f)
         {
@@ -52,25 +50,14 @@ public class TaskFollow : Node
         {
             Debug.Log("timer running");
             timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                transform.LookAt(playerTransform.position);
-                rotation = Quaternion.AngleAxis(Random.Range(-30, 30), Vector3.up);
-                rotation = playerTransform.rotation * rotation;
-                forward = rotation * Vector3.forward;
-                destination = playerTransform.position + forward * Random.Range(1f, 2);
-                destination.y = transform.position.y;
-                destMin = destination - offset;
-                destMax = destination + offset;
-                destSet = true;
-            }
         }
         else timer = 3.0f;
         
-        if (destSet == true && distance >= 3.0f)
+        if ((destSet == true && distance >= 3.0f) || (idleDestSet == true))
         {
             timerRunning = false;
-            if (distance >= 5) CompanionBT.speed *= 2;
+            idleDestSet = false;
+            if (distance >= 5) CompanionBT.speed *= 1.5f;
             else CompanionBT.speed = 5;
 
             if (CompanionBT.speed == 5)
@@ -125,11 +112,16 @@ public class TaskFollow : Node
                 rotation = Quaternion.AngleAxis(Random.Range(-30, 30), Vector3.up);
                 rotation = playerTransform.rotation * rotation;
                 forward = rotation * Vector3.forward;
-                destination = playerTransform.position + forward * Random.Range(1f, 2);
+                destination = playerTransform.position + forward * Random.Range(1f, 3f);
                 destination.y = transform.position.y;
                 destMin = destination - offset;
                 destMax = destination + offset;
                 destSet = true;
+                timerRunning = false;
+                idleDestSet = true;
+                timer = 3.0f;
+                Debug.Log("Idle Destination: " + destination);
+                Vector3.MoveTowards(transform.position, destination, CompanionBT.speed);
             }
         }
 

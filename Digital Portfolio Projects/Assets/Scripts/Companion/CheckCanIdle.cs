@@ -27,7 +27,7 @@ public class CheckCanIdle : Node
         }
         else
         {
-            state = NodeState.SUCCESS;
+            state = NodeState.FAILURE;
             return state;
         }
     }
