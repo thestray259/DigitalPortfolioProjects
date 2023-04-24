@@ -62,11 +62,11 @@ public class TaskFollow : Node
             transform.LookAt(destination);
             Debug.DrawLine(transform.position, destination, color:Color.red);
 
-            /*if (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
+            if (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
                 transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
                 transform.position.z >= destMin.z && transform.position.z <= destMax.z)
-            { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; Debug.Log("Companion within offset"); }*/
-            if (Vector3.Distance(destination, playerTransform.position) > 3.8f)
+            { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; Debug.Log("Companion within offset"); }
+            else if (Vector3.Distance(destination, playerTransform.position) > 3.8f)
             {
                 Debug.Log("Follow Destination Reset");
                 transform.LookAt(playerTransform.position);

@@ -34,10 +34,9 @@ public class TaskIdle : Node
         timer -= Time.deltaTime;
 
         // after a couple seconds, choose a place within distance of the Player to move to
-        // should add a different destination if ordered to stay
+        // should add a different destination if ordered to stay -> use canFollow from player
         if (timer <= 0)
         {
-            transform.LookAt(playerTransform.position);
             rotation = Quaternion.AngleAxis(Random.Range(-30, 30), Vector3.up);
             rotation = playerTransform.rotation * rotation;
             forward = rotation * Vector3.forward;
@@ -50,12 +49,24 @@ public class TaskIdle : Node
             Debug.Log("Idle Destination: " + destination);
         }
 
-        if (destSet == true && (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
-                                transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
-                                transform.position.z >= destMin.z && transform.position.z <= destMax.z))
+        if (destSet == true)
         {
-            Vector3.MoveTowards(transform.position, destination, CompanionBT.speed);
+            transform.LookAt(destination);
+            transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
+            //destSet = false;
             animator.SetBool("walking", true);
+            Debug.Log("Idle walking");
+        }
+
+        if (transform.position == destination || (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
+                                                  transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
+                                                  transform.position.z >= destMin.z && transform.position.z <= destMax.z))
+        {
+            Debug.Log("Within Idle Offset");
+            timer = 3.0f;
+            destSet = false;
+            animator.SetBool("walking", false);
+            destination = new Vector3();
         }
 
         state = NodeState.RUNNING;

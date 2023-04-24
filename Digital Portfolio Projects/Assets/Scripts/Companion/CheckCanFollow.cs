@@ -9,8 +9,9 @@ public class CheckCanFollow : Node
     Transform transform;
     public Vector3 destination;
     private UnityEngine.GameObject playerObject;
+    Animator animator;
 
-    public CheckCanFollow(Transform transform, GameObject playerObject) { this.transform = transform; this.playerObject = playerObject; }
+    public CheckCanFollow(Transform transform, GameObject playerObject) { this.transform = transform; this.playerObject = playerObject; animator = transform.GetComponent<Animator>(); }
 
     public override NodeState Evaluate()
     {
@@ -24,7 +25,10 @@ public class CheckCanFollow : Node
             return state; 
         }
 
-        Debug.Log("Can Follow = false"); 
+        Debug.Log("Can Follow = false");
+        animator.SetBool("walking", false);
+        animator.SetBool("running", false);
+
         state = NodeState.FAILURE;
         return state; 
     }
