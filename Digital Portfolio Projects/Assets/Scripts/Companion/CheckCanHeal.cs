@@ -26,7 +26,6 @@ public class CheckCanHeal : Node
 
         //Debug.Log("CheckCanHeal Failure"); 
         CompanionBT.healTimer -= Time.deltaTime;
-        Debug.Log("healTimer: " + CompanionBT.healTimer); 
 
         state = NodeState.FAILURE;
         return state; 

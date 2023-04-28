@@ -12,15 +12,24 @@ public class Health : MonoBehaviour
     public float health;
     public bool isDead = false;
 
-    Animator animator; 
+    Animator animator;
+    //Transform transform;
 
     void Start()
     {
         health = maxHealth;
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
+        //transform = GetComponent<Transform>();
     }
 
-    private void Update()
+    public void Damage(float damage)
+    {
+        health -= damage;
+        animator.SetTrigger("hit");
+        DeathCheck();
+    }
+
+    public void DeathCheck()
     {
         if (!isDead && health <= 0)
         {
@@ -43,30 +52,8 @@ public class Health : MonoBehaviour
                 if (destroyRoot) Destroy(gameObject.transform.root.gameObject);
                 //else Destroy(gameObject, 3.5f); 
                 else gameObject.SetActive(false); // actually disables it, not destroys it 
-            }
-        }
-    }
 
-    public void Damage(float damage)
-    {
-        health -= damage;
-        if (!isDead && health <= 0)
-        {
-            isDead = true;
-            if (TryGetComponent<IDestructable>(out IDestructable destructable))
-            {
-                destructable.Destroyed();
-            }
-
-            if (deathPrefab != null)
-            {
-                Instantiate(deathPrefab, transform.position, transform.rotation);
-            }
-
-            if (destroyOnDeath)
-            {
-                if (destroyRoot) Destroy(gameObject.transform.root.gameObject);
-                else Destroy(gameObject);
+                transform.position = new Vector3(-100, -100, -100);
             }
         }
     }

@@ -14,7 +14,8 @@ public class CheckForEnemy : Node
 
     public override NodeState Evaluate()
     {
-        //Debug.Log("Companion entered CheckForEnemy");
+        Debug.Log("Companion entered CheckForEnemy");
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, CompanionBT.fovRange, _enemyLayerMask);
         object t = GetData("target"); 
         if (t == null)
         {
@@ -22,6 +23,11 @@ public class CheckForEnemy : Node
 
             if (colliders.Length > 0)
             {
+                if (colliders[0].GetComponent<Health>().isDead == true)
+                {
+                    state = NodeState.FAILURE;
+                    return state;
+                }
                 parent.parent.SetData("target", colliders[0].transform);
 
                 state = NodeState.SUCCESS;

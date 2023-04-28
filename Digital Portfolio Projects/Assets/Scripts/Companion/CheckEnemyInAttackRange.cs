@@ -23,8 +23,6 @@ public class CheckEnemyInAttackRange : Node
         Transform target = (Transform)t; 
         if (Vector3.Distance(transform.position, target.position) <= CompanionBT.attackRange)
         {
-            // set animations here maybe
-
             state = NodeState.SUCCESS;
             return state; 
         }

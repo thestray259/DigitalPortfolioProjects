@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     float airTime = 0;
     float distToGround = 0.5f;
     public bool canFollow = true;
+    private static int _enemyLayerMask = 1 << 6;
 
     void Start()
     {
@@ -135,7 +136,7 @@ public class Player : MonoBehaviour
 
     private void OnAttack()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, attackDistance);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackDistance, _enemyLayerMask);
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) // left click
         {
@@ -143,17 +144,21 @@ public class Player : MonoBehaviour
             Debug.Log("Player Primary Attack");
             // play attack animation 
             // can't interupt animation with other attacks, but can with sprint/dodge 
+            // need to freeze rotation during punch
             animator.SetTrigger("punch"); 
 
-            foreach (Collider collider in colliders)
+            if (colliders.Length > 0)
             {
-                if (collider.gameObject == gameObject) continue;
-
-                if (tagName == "" || collider.CompareTag(tagName))
+                foreach (Collider collider in colliders)
                 {
-                    if (collider.gameObject.TryGetComponent<GenEnemyBT>(out GenEnemyBT genEnemyBT))
+                    if (collider.gameObject == gameObject) continue;
+
+                    if (collider.CompareTag(tagName))
                     {
-                        genEnemyBT.gameObject.GetComponent<Health>().health -= damage; 
+                        if (collider.gameObject.TryGetComponent<GenEnemyBT>(out GenEnemyBT genEnemyBT))
+                        {
+                            genEnemyBT.gameObject.GetComponent<Health>().Damage(damage);
+                        }
                     }
                 }
             }

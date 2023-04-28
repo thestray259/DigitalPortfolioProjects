@@ -43,7 +43,7 @@ public class TaskAttackPlayer : Node
                     if (colliders[0].gameObject.TryGetComponent<Player>(out Player player))
                     {
                         Debug.Log("Enemy Attacking Player");
-                        player.gameObject.GetComponent<Health>().health -= GenEnemyBT.damage;
+                        player.gameObject.GetComponent<Health>().Damage(GenEnemyBT.damage);
                         //playerAnimator.SetTrigger("hit"); 
                         if (player.gameObject.GetComponent<Health>().health <= 0)
                         {
@@ -56,13 +56,12 @@ public class TaskAttackPlayer : Node
             }
             else if (compColliders.Length > 0)
             {
-                Debug.Log("Companion Tag: " + compColliders[0].gameObject.tag);
                 if (compColliders[0].CompareTag("Companion"))
                 {
                     if (compColliders[0].gameObject.TryGetComponent<CompanionBT>(out CompanionBT companionBT))
                     {
                         Debug.Log("Enemy Attacking Companion");
-                        companionBT.GetComponent<Health>().health -= GenEnemyBT.damage;
+                        companionBT.GetComponent<Health>().Damage(GenEnemyBT.damage);
                         if (companionBT.GetComponent<Health>().health <= 0)
                         {
                             ClearData("target");

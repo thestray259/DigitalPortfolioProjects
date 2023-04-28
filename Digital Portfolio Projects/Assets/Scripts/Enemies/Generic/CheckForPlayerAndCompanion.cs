@@ -11,10 +11,6 @@ public class CheckForPlayerAndCompanion : Node
     public static int _playerLayerMask = 1 << 7;
     public static int _companionLayerMask = 1 << 8;
 
-    // share info with TaskAttackPlayer ?
-    //public Collider[] colliders;
-    //public Collider[] compColliders;
-
     public CheckForPlayerAndCompanion(Transform transform) { this.transform = transform; }
 
     public override NodeState Evaluate()
@@ -25,7 +21,7 @@ public class CheckForPlayerAndCompanion : Node
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, GenEnemyBT.fovRange, _playerLayerMask);
             Collider[] compColliders = Physics.OverlapSphere(transform.position, GenEnemyBT.fovRange, _companionLayerMask);
-            if (colliders.Length > 0)
+            if (colliders.Length > 0 && colliders[0].gameObject.activeInHierarchy == true)
             {
                 Debug.Log("Enemy Found Player");
                 parent.parent.SetData("target", colliders[0].transform);
@@ -33,7 +29,7 @@ public class CheckForPlayerAndCompanion : Node
                 state = NodeState.SUCCESS;
                 return state;
             }
-            else if (compColliders.Length > 0)
+            else if (compColliders.Length > 0 && compColliders[0].gameObject.activeInHierarchy == true)
             {
                 Debug.Log("Enemy Found Companion");
                 parent.parent.SetData("target", compColliders[0].transform);

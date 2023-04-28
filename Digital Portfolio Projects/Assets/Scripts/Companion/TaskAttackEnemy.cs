@@ -39,19 +39,11 @@ public class TaskAttackEnemy : Node
             {
                 //if (collider.gameObject == component.gameObject) continue; // was breaking it for some reason 
 
-                if (collider.CompareTag("Enemy"))
+                if (collider.gameObject.activeInHierarchy == true && collider.CompareTag("Enemy"))
                 {
                     if (collider.gameObject.TryGetComponent<GenEnemyBT>(out GenEnemyBT genEnemyBT))
                     {
-                        genEnemyBT.gameObject.GetComponent<Health>().health -= CompanionBT.damage;
-                        // set enemy animation to hit 
-                        enemyAnimator.SetTrigger("hit"); 
-                        if (genEnemyBT.gameObject.GetComponent<Health>().health <= 0)
-                        {
-                            ClearData("target");
-                            // set enemy animation to dead
-                            enemyAnimator.SetTrigger("dead"); 
-                        }
+                        genEnemyBT.gameObject.GetComponent<Health>().Damage(CompanionBT.damage);
                     }
                 }
             }
