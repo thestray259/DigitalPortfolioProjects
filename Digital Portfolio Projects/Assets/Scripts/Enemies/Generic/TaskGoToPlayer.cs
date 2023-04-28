@@ -29,7 +29,7 @@ public class TaskGoToPlayer : Node
             if (Vector3.Distance(transform.position, target.position) > 5.0f)
             {
                 timer += Time.deltaTime;
-                Debug.Log("Timer: " + timer); 
+                //Debug.Log("Timer: " + timer); 
             }            
         }
 

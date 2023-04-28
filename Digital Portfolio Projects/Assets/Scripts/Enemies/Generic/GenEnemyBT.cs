@@ -23,7 +23,7 @@ public class GenEnemyBT : BTree
             }),
             new Sequence(new List<Node>
             {
-                new CheckForPlayer(transform),
+                new CheckForPlayerAndCompanion(transform),
                 new TaskGoToPlayer(transform)
             }),
             new GenEnemyIdle(transform)

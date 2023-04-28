@@ -30,7 +30,6 @@ public class TaskIdle : Node
         // idle code here
         var playerTransform = playerObject.GetComponent<Transform>();
 
-        Debug.Log("timer running");
         timer -= Time.deltaTime;
 
         // after a couple seconds, choose a place within distance of the Player to move to
@@ -40,13 +39,12 @@ public class TaskIdle : Node
             rotation = Quaternion.AngleAxis(Random.Range(-30, 30), Vector3.up);
             rotation = playerTransform.rotation * rotation;
             forward = rotation * Vector3.forward;
-            destination = playerTransform.position + forward * Random.Range(1f, 3f);
+            destination = playerTransform.position - forward * Random.Range(1f, 3f);
             destination.y = transform.position.y;
             destMin = destination - offset;
             destMax = destination + offset;
             destSet = true;
             timer = 3.0f;
-            Debug.Log("Idle Destination: " + destination);
         }
 
         if (destSet == true)
@@ -55,14 +53,14 @@ public class TaskIdle : Node
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
             //destSet = false;
             animator.SetBool("walking", true);
-            Debug.Log("Idle walking");
+            //Debug.Log("Idle walking");
         }
 
-        if (transform.position == destination || (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
+        if (destSet == true && (transform.position == destination || (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
                                                   transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
-                                                  transform.position.z >= destMin.z && transform.position.z <= destMax.z))
+                                                  transform.position.z >= destMin.z && transform.position.z <= destMax.z)))
         {
-            Debug.Log("Within Idle Offset");
+            //Debug.Log("Within Idle Offset");
             timer = 3.0f;
             destSet = false;
             animator.SetBool("walking", false);

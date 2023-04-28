@@ -24,7 +24,7 @@ public class CheckPlayerInAttackRange : Node
         if (Vector3.Distance(transform.position, target.position) <= GenEnemyBT.attackRange)
         {
             // set animations here maybe
-
+            Debug.Log("Player/Companion in Attack Range");
             state = NodeState.SUCCESS;
             return state;
         }
