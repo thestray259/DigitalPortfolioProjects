@@ -40,8 +40,8 @@ public class CompanionBT : BTree
             }),
             new Sequence(new List<Node>
             {
-                new CheckCanIdle(transform, playerObject),
-                new TaskIdle(transform, playerObject)
+                new CheckCanIdle(transform),
+                new TaskIdle(transform, playerTransform)
             })
         });
 

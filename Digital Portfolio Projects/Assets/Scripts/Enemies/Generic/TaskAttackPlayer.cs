@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class TaskAttackPlayer : Node
 {
-    private Transform transform; 
+    private Transform transform;
     private Transform lastTarget;
-
     private float attackTime = 1f;
     private float attackCounter = 0;
 
-    private Animator animator; 
-    private Animator playerAnimator; 
+    private Animator animator;
 
     public TaskAttackPlayer(Transform transform) { this.transform = transform; animator = transform.GetComponent<Animator>(); }
 
@@ -21,7 +18,6 @@ public class TaskAttackPlayer : Node
     {
         Debug.Log("Enemy entered TaskAttackPlayer");
         Transform target = (Transform)GetData("target");
-        //playerAnimator = target.GetComponent<Animator>();
 
         if (target != lastTarget)
         {
@@ -40,16 +36,14 @@ public class TaskAttackPlayer : Node
             {
                 if (colliders[0].CompareTag("Player"))
                 {
-                    if (colliders[0].gameObject.TryGetComponent<Player>(out Player player))
+                    if (colliders[0].gameObject.TryGetComponent(out Player player))
                     {
                         Debug.Log("Enemy Attacking Player");
                         player.gameObject.GetComponent<Health>().Damage(GenEnemyBT.damage);
-                        //playerAnimator.SetTrigger("hit"); 
                         if (player.gameObject.GetComponent<Health>().health <= 0)
                         {
                             // might need to do something different here bc companion
                             ClearData("target");
-                            //playerAnimator.SetTrigger("dead"); 
                         }
                     }
                 }
@@ -58,7 +52,7 @@ public class TaskAttackPlayer : Node
             {
                 if (compColliders[0].CompareTag("Companion"))
                 {
-                    if (compColliders[0].gameObject.TryGetComponent<CompanionBT>(out CompanionBT companionBT))
+                    if (compColliders[0].gameObject.TryGetComponent(out CompanionBT companionBT))
                     {
                         Debug.Log("Enemy Attacking Companion");
                         companionBT.GetComponent<Health>().Damage(GenEnemyBT.damage);

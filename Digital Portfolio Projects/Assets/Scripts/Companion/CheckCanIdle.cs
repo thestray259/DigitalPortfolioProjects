@@ -6,13 +6,11 @@ using UnityEngine;
 public class CheckCanIdle : Node
 {
     Transform transform;
-    private UnityEngine.GameObject playerObject;
     Animator animator;
 
-    public CheckCanIdle(Transform transform, GameObject playerObject)
+    public CheckCanIdle(Transform transform)
     {
         this.transform = transform;
-        this.playerObject = playerObject;
         this.animator = transform.GetComponent<Animator>();
     }
 

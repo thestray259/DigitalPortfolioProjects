@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree; 
 
 public class GenEnemyIdle : Node
@@ -32,7 +31,6 @@ public class GenEnemyIdle : Node
         }
         else { isAwayFromStart = false; Debug.Log("Enemy - isAwyFromStart is false"); }
 
-        //if (transform.position != initialPosition)
         if (isAwayFromStart == true)
         {
             animator.SetBool("walking", true);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class TaskIdle : Node
 {
     Transform transform;
-    private UnityEngine.GameObject playerObject;
+    Transform playerTransform;
     Animator animator;
     float timer = 3.0f;
     bool destSet = false;
@@ -17,18 +17,16 @@ public class TaskIdle : Node
     Vector3 forward = new Vector3();
     Quaternion rotation = Quaternion.identity;
 
-    public TaskIdle(Transform transform, GameObject playerObject)
+    public TaskIdle(Transform transform, Transform playerTransform)
     {
         this.transform = transform;
-        this.playerObject = playerObject;
+        this.playerTransform = playerTransform;
         animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
     {
         Debug.Log("Companion entered TaskIdle");
-        // idle code here
-        var playerTransform = playerObject.GetComponent<Transform>();
 
         timer -= Time.deltaTime;
 
@@ -51,16 +49,13 @@ public class TaskIdle : Node
         {
             transform.LookAt(destination);
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
-            //destSet = false;
             animator.SetBool("walking", true);
-            //Debug.Log("Idle walking");
         }
 
         if (destSet == true && (transform.position == destination || (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
                                                   transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
                                                   transform.position.z >= destMin.z && transform.position.z <= destMax.z)))
         {
-            //Debug.Log("Within Idle Offset");
             timer = 3.0f;
             destSet = false;
             animator.SetBool("walking", false);

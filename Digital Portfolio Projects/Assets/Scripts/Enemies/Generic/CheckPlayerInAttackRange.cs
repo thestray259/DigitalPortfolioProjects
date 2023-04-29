@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree; 
 
 public class CheckPlayerInAttackRange : Node
@@ -23,7 +22,6 @@ public class CheckPlayerInAttackRange : Node
         Transform target = (Transform)t;
         if (Vector3.Distance(transform.position, target.position) <= GenEnemyBT.attackRange)
         {
-            // set animations here maybe
             Debug.Log("Player/Companion in Attack Range");
             state = NodeState.SUCCESS;
             return state;

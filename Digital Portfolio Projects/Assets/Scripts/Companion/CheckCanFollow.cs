@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree; 
 
 public class CheckCanFollow : Node
 {
     Transform transform;
     public Vector3 destination;
-    private UnityEngine.GameObject playerObject;
+    private GameObject playerObject;
     Animator animator;
 
     public CheckCanFollow(Transform transform, GameObject playerObject) { this.transform = transform; this.playerObject = playerObject; animator = transform.GetComponent<Animator>(); }

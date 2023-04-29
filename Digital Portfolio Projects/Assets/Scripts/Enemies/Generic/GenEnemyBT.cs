@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree; 
 
 public class GenEnemyBT : BTree
@@ -9,7 +8,6 @@ public class GenEnemyBT : BTree
     public static float speed = 5.0f;
     public static float fovRange = 6f;
     public static float attackRange = 1.3f;
-
     public static float damage = 10f;
 
     protected override Node SetupTree()
@@ -31,11 +29,4 @@ public class GenEnemyBT : BTree
 
         return root; 
     }
-
-/*    private void Update()
-    {
-        if (_root != null) _root.Evaluate();
-        animator.SetFloat("speed", movement.velocity.magnitude);
-        Debug.Log("Enemy Speed: " + movement.velocity.magnitude); 
-    }*/
 }

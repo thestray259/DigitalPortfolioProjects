@@ -13,13 +13,11 @@ public class Health : MonoBehaviour
     public bool isDead = false;
 
     Animator animator;
-    //Transform transform;
 
     void Start()
     {
         health = maxHealth;
         animator = GetComponent<Animator>();
-        //transform = GetComponent<Transform>();
     }
 
     public void Damage(float damage)
@@ -43,7 +41,8 @@ public class Health : MonoBehaviour
 
             if (deathPrefab != null)
             {
-                Instantiate(deathPrefab, transform.position, transform.rotation);
+                GameObject death = Instantiate(deathPrefab, transform.position, transform.rotation);
+                Destroy(death, 3.5f);
             }
 
             if (destroyOnDeath)

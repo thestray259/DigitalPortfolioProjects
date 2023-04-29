@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using BehaviorTree;
 
 public class TaskGoToPlayer : Node
 {
     Transform transform;
-    public float timer = 0.0f;
-
-    private Animator animator; 
+    float timer = 0.0f;
+    Animator animator; 
 
     public TaskGoToPlayer(Transform transform) { this.transform = transform; animator = transform.GetComponent<Animator>(); }
 
@@ -26,10 +24,9 @@ public class TaskGoToPlayer : Node
             animator.SetBool("walking", true);
 
             if (Vector3.Distance(transform.position, target.position) < 5.0f) timer = 0;
-            if (Vector3.Distance(transform.position, target.position) > 5.0f)
+            else
             {
                 timer += Time.deltaTime;
-                //Debug.Log("Timer: " + timer); 
             }            
         }
 
