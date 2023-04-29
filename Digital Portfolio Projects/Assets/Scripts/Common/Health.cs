@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
 
     public void Damage(float damage)
     {
+        Debug.Log("ouch");
         health -= damage;
         animator.SetTrigger("hit");
         DeathCheck();

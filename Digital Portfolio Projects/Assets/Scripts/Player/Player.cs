@@ -14,15 +14,17 @@ public class Player : MonoBehaviour
     [SerializeField] float damage = 10; 
     [SerializeField] ForceMode forceMode;
     [SerializeField] string tagName = "Enemy";
+    [SerializeField] Vector3 velocity = Vector3.zero;
     
     Rigidbody rb;
     Vector3 force = Vector3.zero; 
-    [SerializeField] Vector3 velocity = Vector3.zero;
     bool isGrounded = false; 
     float airTime = 0;
     float distToGround = 0.5f;
     public bool canFollow = true;
-    private static int _enemyLayerMask = 1 << 6;
+    static int _enemyLayerMask = 1 << 6;
+    Vector3 attackPosition;
+    Quaternion attackRotation;
 
     void Start()
     {
@@ -32,20 +34,30 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // xz movement
-        Vector3 direction = Vector3.zero;
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
-        direction = Vector3.ClampMagnitude(direction, 1);
+        {
+            // xz movement
+            Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            direction = Vector3.ClampMagnitude(direction, 1);
         
-        // convert direction from world space to view space
-        Quaternion viewSpace = Quaternion.AngleAxis(view.rotation.eulerAngles.y, Vector3.up);
-        direction = viewSpace * direction;
+            // convert direction from world space to view space
+            Quaternion viewSpace = Quaternion.AngleAxis(view.rotation.eulerAngles.y, Vector3.up);
+            direction = viewSpace * direction;
 
-        // move character (xyz)
-        Move(view);
+            // face direction
+            if (direction.magnitude > 0) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnRate * Time.deltaTime);
+            // if punching, don't move
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch")) transform.SetPositionAndRotation(attackPosition, attackRotation);
+            else
+            {
+                direction = speed * Time.deltaTime * direction.normalized;
+                transform.position += direction;
+            }
+            animator.SetFloat("speed", (direction * speed).magnitude);
+        } // move character (xyz)
+
+        GroundCheck();
         OnJump();
-        OnAttack(); 
+        OnAttack();
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -53,61 +65,9 @@ public class Player : MonoBehaviour
             else canFollow = true; 
         } // companion follow
 
-        // face direction (needs fixing) - works when iskinematic = false 
-        if (direction.magnitude > 0)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnRate * Time.deltaTime);
-        }
-
         // set animation stuff
-        animator.SetBool("isGrounded", isGrounded);
-        animator.SetFloat("speed", (direction * speed).magnitude); 
+        animator.SetBool("isGrounded", isGrounded);        
         if (GetComponent<Health>().isDead == true) animator.SetTrigger("dead"); 
-    }
-
-    private void FixedUpdate()
-    {
-        rb.AddForce(force, forceMode);
-        GroundCheck(); 
-    }
-
-    private void Move(Transform view)
-    {
-        Vector3 forward = view.transform.forward;
-        Vector3 right = view.transform.right;
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        // check if punch anim is playing, if not then can move, if so then can't move 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
-        {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            {
-                // move forward
-                transform.position += speed * Time.deltaTime * forward;
-            }
-
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                // move left 
-                transform.position += speed * Time.deltaTime * -right;
-            }
-
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-                // move backwards 
-                transform.position += speed * Time.deltaTime * -forward;
-            }
-
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                // move right 
-                transform.position += speed * Time.deltaTime * right;
-            }
-        }
-
     }
 
     private void GroundCheck()
@@ -138,14 +98,14 @@ public class Player : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackDistance, _enemyLayerMask);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // left click
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // primary / regular attack 
-            Debug.Log("Player Primary Attack");
+            // primary / regular attack
             // play attack animation 
-            // can't interupt animation with other attacks, but can with sprint/dodge 
-            // need to freeze rotation during punch
-            animator.SetTrigger("punch"); 
+            // can't interupt animation with other attacks, but can with sprint/dodge
+            animator.SetTrigger("punch");
+            attackPosition = transform.position;
+            attackRotation = transform.rotation;
 
             if (colliders.Length > 0)
             {
@@ -155,13 +115,13 @@ public class Player : MonoBehaviour
 
                     if (collider.CompareTag(tagName))
                     {
-                        if (collider.gameObject.TryGetComponent<GenEnemyBT>(out GenEnemyBT genEnemyBT))
+                        if (collider.gameObject.TryGetComponent(out GenEnemyBT genEnemyBT))
                         {
                             genEnemyBT.gameObject.GetComponent<Health>().Damage(damage);
                         }
                     }
                 }
             }
-        }
+        } // left click
     }
 }
