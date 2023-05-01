@@ -20,7 +20,7 @@ public class TaskAttackEnemy : Node
         Debug.Log("Companion entered TaskAttackEnemy"); 
         Transform target = (Transform)GetData("target");
 
-        Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.attackRange); // used to be lastTarget.position but that was breaking it for some reason
+        Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.melleAttackRange); // used to be lastTarget.position but that was breaking it for some reason
 
         if (target != lastTarget)
         {

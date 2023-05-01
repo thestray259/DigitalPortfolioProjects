@@ -5,7 +5,7 @@ using BehaviorTree;
 
 public class CheckEnemyInAttackRange : Node
 {
-    private Transform transform; 
+    readonly Transform transform; 
 
     public CheckEnemyInAttackRange(Transform transform) { this.transform = transform; }
 
@@ -19,7 +19,7 @@ public class CheckEnemyInAttackRange : Node
         }
 
         Transform target = (Transform)t; 
-        if (Vector3.Distance(transform.position, target.position) <= CompanionBT.attackRange)
+        if (Vector3.Distance(transform.position, target.position) <= CompanionBT.melleAttackRange)
         {
             state = NodeState.SUCCESS;
             return state; 

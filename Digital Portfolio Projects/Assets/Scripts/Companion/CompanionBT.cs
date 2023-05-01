@@ -9,9 +9,11 @@ public class CompanionBT : BTree
 
     public static float speed = 5.0f;
     public static float fovRange = 6f;
-    public static float attackRange = 2f;
+    public static float melleAttackRange = 2f;
     public static float damage = 10f;
-    public static float healTimer = 0.0f; 
+    public static float healTimer = 0.0f;
+    public static float minRangedAttack = 10f;
+    public static float maxRangedAttack = 15f;
 
     protected override Node SetupTree()
     {
@@ -22,6 +24,10 @@ public class CompanionBT : BTree
                 new CheckCanHeal(transform),
                 new CheckPlayerHealth(transform, playerObject), 
                 new TaskHealPlayer(transform, playerObject)
+            }),
+            new Sequence(new List<Node> {
+                new CheckEnemyInShootingRange(transform),
+                new TaskShootBow(transform)
             }),
             new Sequence(new List<Node>
             {
