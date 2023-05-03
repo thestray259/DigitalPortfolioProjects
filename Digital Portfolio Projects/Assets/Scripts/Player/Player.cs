@@ -18,7 +18,8 @@ public class Player : MonoBehaviour
     
     Rigidbody rb;
     Vector3 force = Vector3.zero; 
-    bool isGrounded = false; 
+    bool isGrounded = false;
+    bool isAttacking = false;
     float airTime = 0;
     float distToGround = 0.5f;
     public bool canFollow = true;
@@ -46,14 +47,28 @@ public class Player : MonoBehaviour
             // face direction
             if (direction.magnitude > 0) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnRate * Time.deltaTime);
             // if punching, don't move
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch")) transform.SetPositionAndRotation(attackPosition, attackRotation);
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") && !animator.IsInTransition(0)) transform.SetPositionAndRotation(attackPosition, attackRotation); //animator.GetCurrentAnimatorStateInfo(0).IsName("Punch")
             else
             {
-                direction = speed * Time.deltaTime * direction.normalized;
-                transform.position += direction;
+                if (Input.GetMouseButton(1))
+                {
+                    animator.SetBool("isRunning", true);
+                    direction = (speed * 2f) * Time.deltaTime * direction.normalized;
+                    transform.position += direction;
+                }
+                else
+                {
+                    animator.SetBool("isRunning", false);
+                    direction = speed * Time.deltaTime * direction.normalized;
+                    transform.position += direction;
+                }
             }
             animator.SetFloat("speed", (direction * speed).magnitude);
+            Debug.Log("speed: " + (direction * speed).magnitude);
         } // move character (xyz)
+
+        // if attack anim is done playing, then set isAttacking to false
+        //if ()
 
         GroundCheck();
         OnJump();
@@ -104,6 +119,7 @@ public class Player : MonoBehaviour
             // play attack animation 
             // can't interupt animation with other attacks, but can with sprint/dodge
             animator.SetTrigger("punch");
+            isAttacking = true;
             attackPosition = transform.position;
             attackRotation = transform.rotation;
 
