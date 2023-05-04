@@ -1377,7 +1377,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3638818835772806110}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 160, y: 1, z: -64}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
@@ -1425,8 +1425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcb41348bc85bb48b35b81f4fbee622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathPrefab: {fileID: 919132149155446097, guid: 386778b29fb763d4c84cd02725219662, type: 3}
-  maxHealth: 100
+  deathPrefab: {fileID: 0}
+  maxHealth: 10000000
   destroyOnDeath: 1
   destroyRoot: 0
   health: 100
@@ -1477,7 +1477,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}

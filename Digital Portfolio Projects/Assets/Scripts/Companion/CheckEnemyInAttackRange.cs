@@ -11,16 +11,21 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
+        Debug.Log("Comp entered CheckEnemyInAttackRange");
         object t = GetData("target"); 
         if (t == null)
         {
+            Debug.Log("CheckEnemyInAttackRange Failure");
             state = NodeState.FAILURE;
             return state; 
         }
 
-        Transform target = (Transform)t; 
-        if (Vector3.Distance(transform.position, target.position) <= CompanionBT.melleAttackRange)
-        {
+        Transform target = (Transform)t;
+        Animator targetAnim = target.GetComponent<Animator>();
+
+        if (Vector3.Distance(transform.position, target.position) <= CompanionBT.meleeAttackRange && !targetAnim.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+        {            
+            Debug.Log("CheckEnemyInAttackRange Success");
             state = NodeState.SUCCESS;
             return state; 
         }

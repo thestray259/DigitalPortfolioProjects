@@ -8,10 +8,11 @@ public class TaskAttackEnemy : Node
     private Transform transform; 
     private Transform lastTarget;
 
-    private float attackTime = 1f;
+    private float attackTime = 1.5f;
     private float attackCounter = 0;
 
-    private Animator animator; 
+    private Animator animator;
+    private static readonly int _enemyLayerMask = 1 << 6;
 
     public TaskAttackEnemy(Transform transform) { this.transform = transform; animator = transform.GetComponent<Animator>(); }
 
@@ -20,7 +21,7 @@ public class TaskAttackEnemy : Node
         Debug.Log("Companion entered TaskAttackEnemy"); 
         Transform target = (Transform)GetData("target");
 
-        Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.melleAttackRange); // used to be lastTarget.position but that was breaking it for some reason
+        Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.meleeAttackRange, _enemyLayerMask); // used to be lastTarget.position but that was breaking it for some reason
 
         if (target != lastTarget)
         {

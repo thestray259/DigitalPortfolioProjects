@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
             // face direction
             if (direction.magnitude > 0) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), turnRate * Time.deltaTime);
             // if punching, don't move
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") && !animator.IsInTransition(0)) transform.SetPositionAndRotation(attackPosition, attackRotation); //animator.GetCurrentAnimatorStateInfo(0).IsName("Punch")
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") && !animator.IsInTransition(0)) transform.SetPositionAndRotation(attackPosition, attackRotation);
             else
             {
                 if (Input.GetMouseButton(1))
@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
                 }
             }
             animator.SetFloat("speed", (direction * speed).magnitude);
-            Debug.Log("speed: " + (direction * speed).magnitude);
         } // move character (xyz)
 
         // if attack anim is done playing, then set isAttacking to false

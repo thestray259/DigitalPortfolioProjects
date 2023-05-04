@@ -7,7 +7,7 @@ using BehaviorTree;
 public class CheckForEnemy : Node
 {
     private Transform transform;
-    private static int _enemyLayerMask = 1 << 6;
+    private static readonly int _enemyLayerMask = 1 << 6;
 
     public CheckForEnemy(Transform transform) { this.transform = transform; }
 
@@ -21,12 +21,14 @@ public class CheckForEnemy : Node
             Debug.Log("t == null");
             if (colliders.Length > 0)
             {
+                Debug.Log("CheckForEnemy Success");
                 parent.parent.SetData("target", colliders[0].transform);
 
                 state = NodeState.SUCCESS;
                 return state; 
             }
 
+            Debug.Log("CheckForEnemy Failure");
             ClearData("target");
             state = NodeState.FAILURE;
             return state; 
@@ -36,6 +38,7 @@ public class CheckForEnemy : Node
             Debug.Log("t != null");
             if (colliders.Length <= 0)
             {
+                Debug.Log("CheckForEnemy Failure");
                 ClearData("target");
                 state = NodeState.FAILURE;
                 return state;

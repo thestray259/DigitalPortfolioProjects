@@ -1,15 +1,19 @@
 using System.Collections.Generic;
-using BehaviorTree; 
+using BehaviorTree;
+using UnityEngine;
 
 public class CompanionBT : BTree
 {
-    public UnityEngine.Transform playerTransform;
-    public UnityEngine.GameObject playerObject; 
-    public UnityEngine.Rigidbody rb;
+    public Transform playerTransform;
+    public Transform arrowTransform;
+    public GameObject playerObject; 
+    public Rigidbody rb;
+    public GameObject arrow;
+    public float arrowSpeed = 5;
 
     public static float speed = 5.0f;
     public static float fovRange = 6f;
-    public static float melleAttackRange = 2f;
+    public static float meleeAttackRange = 2f;
     public static float damage = 10f;
     public static float healTimer = 0.0f;
     public static float minRangedAttack = 10f;
@@ -27,7 +31,7 @@ public class CompanionBT : BTree
             }),
             new Sequence(new List<Node> {
                 new CheckEnemyInShootingRange(transform),
-                new TaskShootBow(transform)
+                new TaskShootBow(transform, arrowTransform, arrow, arrowSpeed)
             }),
             new Sequence(new List<Node>
             {
