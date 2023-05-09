@@ -7,23 +7,16 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
     [SerializeField] Transform transform;
-    [SerializeField] Space space = Space.Self;
-    [SerializeField] float speed;
-    Vector3 direction;
     GameObject proj;
 
-    public Projectile(GameObject projectile, Transform transform, Space space, float speed)
+    public Projectile(GameObject projectile, Transform transform)
     {
         this.projectile = projectile;
         this.transform = transform;
-        this.space = space;
-        this.speed = speed;
     }
 
     public void ShootProjectile()
     {
         proj = Instantiate(projectile, transform.position, transform.rotation);
-        direction = transform.forward;
-        proj.transform.Translate(speed * Time.deltaTime * direction, space);
     }
 }

@@ -19,4 +19,9 @@ public class MoveProjectile : MonoBehaviour
     {
         this.gameObject.transform.Translate(speed * Time.deltaTime * direction, space);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this.gameObject);
+    }
 }

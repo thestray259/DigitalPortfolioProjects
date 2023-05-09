@@ -124,13 +124,13 @@ public class Player : MonoBehaviour
 
             if (colliders.Length > 0)
             {
-                foreach (Collider collider in colliders)
+                //foreach (Collider collider in colliders)
                 {
-                    if (collider.gameObject == gameObject) continue;
+                    //if (colliders[0].gameObject == gameObject) continue;
 
-                    if (collider.CompareTag(tagName))
+                    if (colliders[0].CompareTag(tagName))
                     {
-                        if (collider.gameObject.TryGetComponent(out GenEnemyBT genEnemyBT))
+                        if (colliders[0].gameObject.TryGetComponent(out GenEnemyBT genEnemyBT))
                         {
                             genEnemyBT.gameObject.GetComponent<Health>().Damage(damage);
                         }

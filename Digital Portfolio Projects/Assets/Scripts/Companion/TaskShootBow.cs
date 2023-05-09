@@ -35,7 +35,7 @@ public class TaskShootBow : Node
 
         Transform target = (Transform)GetData("target");
         //Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.maxRangedAttack, _enemyLayerMask);
-        Projectile projectile = new Projectile(arrowPrefab, arrowTransform, Space.Self, arrowSpeed);
+        Projectile projectile = new Projectile(arrowPrefab, arrowTransform);
         transform.LookAt(target);
 
         attackCounter += Time.deltaTime;

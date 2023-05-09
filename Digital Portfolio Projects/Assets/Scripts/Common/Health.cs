@@ -5,9 +5,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] GameObject deathPrefab; // death animation
-    [SerializeField] int maxHealth = 100; 
     [SerializeField] bool destroyOnDeath = true;
     [SerializeField] bool destroyRoot = false;
+    public int maxHealth = 100; 
 
     public float health;
     public bool isDead = false;
