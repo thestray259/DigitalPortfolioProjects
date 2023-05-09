@@ -20,18 +20,10 @@ public class Projectile : MonoBehaviour
         this.speed = speed;
     }
 
-    private void Update()
-    {
-/*        if (proj != null)
-        {
-            proj.transform.Translate(speed * Time.deltaTime * direction, space);
-        }*/
-    }
-
     public void ShootProjectile()
     {
         proj = Instantiate(projectile, transform.position, transform.rotation);
         direction = transform.forward;
-        //proj.transform.Translate(speed * Time.deltaTime * direction, space);
+        proj.transform.Translate(speed * Time.deltaTime * direction, space);
     }
 }

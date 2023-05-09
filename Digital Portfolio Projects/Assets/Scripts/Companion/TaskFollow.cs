@@ -44,7 +44,7 @@ public class TaskFollow : Node
         
         if (destSet == true && distance >= 3.0f)
         {
-            if (distance >= 5) CompanionBT.speed *= 1.5f;
+            if (distance >= 5) CompanionBT.speed = 9.5f;
             else CompanionBT.speed = 5;
 
             if (CompanionBT.speed <= 5)

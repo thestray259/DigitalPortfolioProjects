@@ -7,10 +7,10 @@ public class TaskShootBow : Node
 {
     readonly Transform transform;
     Transform arrowTransform;
-    Transform arrowTarget;
+    //Transform arrowTarget;
     GameObject arrowPrefab;
     float arrowSpeed;
-    private static readonly int _enemyLayerMask = 1 << 6;
+    //private static readonly int _enemyLayerMask = 1 << 6;
 
     private float attackTime = 1.5f;
     private float attackCounter = 0;
@@ -30,8 +30,11 @@ public class TaskShootBow : Node
     {
         // shoot bow at enemy
         Debug.Log("Comp shooting bow...");
+        animator.SetBool("walking", false);
+        animator.SetBool("running", false);
+
         Transform target = (Transform)GetData("target");
-        Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.maxRangedAttack, _enemyLayerMask);
+        //Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.maxRangedAttack, _enemyLayerMask);
         Projectile projectile = new Projectile(arrowPrefab, arrowTransform, Space.Self, arrowSpeed);
         transform.LookAt(target);
 
@@ -40,16 +43,6 @@ public class TaskShootBow : Node
         {
             Debug.Log("Bow shot");
             animator.SetBool("walking", false);
-
-            // set trigger for shoot bow anim
-            //projectile.ShootProjectile();
-            /*            GameObject arrow = Object.Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation);
-
-                        // arrowTarget = enemy being shot at
-                        //arrowTarget.position = colliders[0].transform.position;
-
-                        arrow.transform.position = Vector3.MoveTowards(arrow.transform.position, colliders[0].transform.position, arrowSpeed * Time.deltaTime); //arrow.transform.Translate(arrowSpeed * Time.deltaTime * arrowDirection, companionBT.space);
-                        Debug.Log("arrow transform: " + arrow.transform.position);*/
 
             projectile.ShootProjectile();
 

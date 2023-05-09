@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
+    [SerializeField] string tag;
     [SerializeField] float damage = 0;
     [SerializeField] bool oneTime = true; 
 
@@ -11,9 +12,12 @@ public class Damage : MonoBehaviour
     {
         if (!oneTime) return; 
 
-        if (other.gameObject.TryGetComponent<Health>(out Health health))
+        if (other.CompareTag(tag))
         {
-            health.Damage(damage); 
+            if (other.gameObject.TryGetComponent<Health>(out Health health))
+            {
+                health.Damage(damage);
+            }
         }
     }
 
@@ -21,9 +25,12 @@ public class Damage : MonoBehaviour
     {
         if (oneTime) return; 
 
-        if (other.gameObject.TryGetComponent<Health>(out Health health))
+        if (other.CompareTag(tag))
         {
-            health.Damage(damage * Time.deltaTime);
+            if (other.gameObject.TryGetComponent<Health>(out Health health))
+            {
+                health.Damage(damage * Time.deltaTime);
+            }
         }
     }
 
@@ -31,9 +38,12 @@ public class Damage : MonoBehaviour
     {
         if (!oneTime) return; 
 
-        if (other.gameObject.TryGetComponent<Health>(out Health health))
+        if (other.gameObject.CompareTag(tag))
         {
-            health.Damage(damage); 
+            if (other.gameObject.TryGetComponent<Health>(out Health health))
+            {
+                health.Damage(damage);
+            }
         }
     }
 }
