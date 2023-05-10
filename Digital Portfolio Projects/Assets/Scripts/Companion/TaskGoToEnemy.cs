@@ -14,8 +14,8 @@ public class TaskGoToEnemy : Node
     {
         Debug.Log("Companion entered TaskGoToEnemy");
         Transform target = (Transform)GetData("target");
-
-        if (Vector3.Distance(transform.position, target.position) > 0.5f && Vector3.Distance(transform.position, target.position) < 10)
+        
+        if (Vector3.Distance(transform.position, target.position) > 1f && Vector3.Distance(transform.position, target.position) < 10)
         {
             animator.SetBool("walking", true);
             // change so that comp sees where player is and stays a distance away

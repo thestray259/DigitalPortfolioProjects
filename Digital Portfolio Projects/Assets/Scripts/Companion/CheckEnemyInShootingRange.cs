@@ -40,7 +40,7 @@ public class CheckEnemyInShootingRange : Node
         }
 
         Debug.Log("CheckEnemyInShootingRange Failure -> out of range");
-        ClearData("target");
+        //ClearData("target");
         state = NodeState.FAILURE;
         return state;
     }

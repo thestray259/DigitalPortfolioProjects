@@ -18,7 +18,7 @@ public class CheckForEnemy : Node
         object t = GetData("target"); 
         if (t == null)
         {
-            Debug.Log("t == null");
+            Debug.Log("Check for enemy: t == null");
             if (colliders.Length > 0)
             {
                 Debug.Log("CheckForEnemy Success");
