@@ -34,9 +34,17 @@ public class TaskShootBow : Node
         animator.SetBool("running", false);
 
         Transform target = (Transform)GetData("target");
+        var targetTransform = target.GetComponent<TargetTransform>();
+        var targetPosition = targetTransform.target.position;
         //Collider[] colliders = Physics.OverlapSphere(target.position, CompanionBT.maxRangedAttack, _enemyLayerMask);
-        Projectile projectile = new Projectile(arrowPrefab, arrowTransform);
+
+        //Projectile projectile = new Projectile(arrowPrefab, arrowTransform);
+        //projectile.transform.LookAt(target.position);
+        Quaternion rotation = Quaternion.LookRotation((targetPosition) - arrowTransform.position);
+        Projectile projectile = new Projectile(arrowPrefab, arrowTransform.position, rotation);
         transform.LookAt(target);
+
+        Debug.DrawLine(arrowTransform.position, targetPosition, Color.red, 10);
 
         attackCounter += Time.deltaTime;
         if (attackCounter >= attackTime)

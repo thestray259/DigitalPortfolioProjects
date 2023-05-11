@@ -9,14 +9,25 @@ public class Projectile : MonoBehaviour
     [SerializeField] Transform transform;
     GameObject proj;
 
+    Vector3 position;
+    Quaternion rotation;
+
     public Projectile(GameObject projectile, Transform transform)
     {
         this.projectile = projectile;
         this.transform = transform;
     }
 
+    public Projectile(GameObject projectile, Vector3 position, Quaternion rotation)
+    {
+        this.projectile = projectile;
+        this.position = position;
+        this.rotation = rotation;
+    }
+
     public void ShootProjectile()
     {
-        proj = Instantiate(projectile, transform.position, transform.rotation);
+        //proj = Instantiate(projectile, transform.position, transform.rotation);
+        proj = Instantiate(projectile, position, rotation);
     }
 }
