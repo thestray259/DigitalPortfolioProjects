@@ -31,7 +31,7 @@ public class CompanionBT : BTree
             }),
             new Sequence(new List<Node> {
                 new CheckEnemyInShootingRange(transform),
-                new TaskShootBow(transform, arrowTransform, arrow, arrowSpeed)
+                new TaskShootBow(transform, arrowTransform, arrow)
             }),
             new Sequence(new List<Node>
             {

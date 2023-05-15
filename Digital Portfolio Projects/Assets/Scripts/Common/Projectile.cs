@@ -6,17 +6,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform transform;
-    GameObject proj;
-
     Vector3 position;
     Quaternion rotation;
-
-    public Projectile(GameObject projectile, Transform transform)
-    {
-        this.projectile = projectile;
-        this.transform = transform;
-    }
 
     public Projectile(GameObject projectile, Vector3 position, Quaternion rotation)
     {
@@ -27,7 +18,6 @@ public class Projectile : MonoBehaviour
 
     public void ShootProjectile()
     {
-        //proj = Instantiate(projectile, transform.position, transform.rotation);
-        proj = Instantiate(projectile, position, rotation);
+        Instantiate(projectile, position, rotation);
     }
 }

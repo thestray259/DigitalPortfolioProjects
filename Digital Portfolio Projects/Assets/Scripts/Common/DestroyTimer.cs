@@ -9,6 +9,5 @@ public class DestroyTimer : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, timer);
-        Debug.Log("Destroyed");
     }
 }

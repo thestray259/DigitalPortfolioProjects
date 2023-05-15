@@ -12,7 +12,6 @@ public class MoveProjectile : MonoBehaviour
     void Start()
     {
         direction = transform.forward;
-        Debug.Log("Projectile direction: " +  direction);
     }
 
     void Update()
@@ -21,6 +20,11 @@ public class MoveProjectile : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         Destroy(this.gameObject);
     }
