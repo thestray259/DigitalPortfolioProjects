@@ -14,15 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField] float damage = 10; 
     [SerializeField] ForceMode forceMode;
     [SerializeField] string tagName = "Enemy";
-    [SerializeField] Vector3 velocity = Vector3.zero;
     
     Rigidbody rb;
-    Vector3 force = Vector3.zero; 
     bool isGrounded = false;
     bool isAttacking = false;
-    float airTime = 0;
     readonly float distToGround = 0.5f;
     public bool canFollow = true;
+    public bool isCalled = false;
     static readonly int _enemyLayerMask = 1 << 6;
     Vector3 attackPosition;
     Quaternion attackRotation;
@@ -50,7 +48,7 @@ public class Player : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Punch") && !animator.IsInTransition(0)) transform.SetPositionAndRotation(attackPosition, attackRotation);
             else
             {
-                if ((direction * speed).magnitude > 0 && Input.GetMouseButton(1))
+                if ((direction * speed).magnitude > 0 && (Input.GetMouseButton(1) || Input.GetKey(KeyCode.LeftShift)))
                 {
                     animator.SetBool("isRunning", true);
                     direction = (speed * 2f) * Time.deltaTime * direction.normalized;
@@ -68,11 +66,16 @@ public class Player : MonoBehaviour
 
         // if attack anim is done playing, then set isAttacking to false
         //if ()
+                
 
         GroundCheck();
         OnJump();
         OnAttack();
 
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isCalled = true;
+        } // call companion to player
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (canFollow == true) canFollow = false;
