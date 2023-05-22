@@ -25,6 +25,11 @@ public class CompanionBT : BTree
         {
             new Sequence(new List<Node>
             {
+                new CheckIsBeingCalled(transform, playerObject),
+                new TaskBeingCalled(transform, playerObject)
+            }),
+            new Sequence(new List<Node>
+            {
                 new CheckCanHeal(transform),
                 new CheckPlayerHealth(transform, playerObject), 
                 new TaskHealPlayer(transform, playerObject)
