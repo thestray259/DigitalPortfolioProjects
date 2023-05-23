@@ -51,11 +51,15 @@ public class TaskFollow : Node
             {
                 animator.SetBool("walking", true);
                 animator.SetBool("running", false);
+                //CompanionBT.isWalking = true;
+                //CompanionBT.isRunning = false;
             }
             else if (CompanionBT.speed > 5)
             {
                 animator.SetBool("walking", false);
                 animator.SetBool("running", true);
+                //CompanionBT.isWalking = false;
+                //CompanionBT.isRunning = true;
             }
             Debug.Log("Following");
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
@@ -65,7 +69,13 @@ public class TaskFollow : Node
             if (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
                 transform.position.y >= destMin.y && transform.position.y <= destMax.y &&
                 transform.position.z >= destMin.z && transform.position.z <= destMax.z)
-            { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; Debug.Log("Companion within offset"); }
+            {
+                animator.SetBool("walking", false); 
+                animator.SetBool("running", false); 
+                //CompanionBT.isWalking = false;
+                //CompanionBT.isRunning = false;
+                destSet = false; Debug.Log("Companion within offset"); 
+            }
             else if (Vector3.Distance(destination, playerTransform.position) > 3.8f)
             {
                 Debug.Log("Follow Destination Reset");
@@ -79,13 +89,21 @@ public class TaskFollow : Node
                 destMax = destination + offset;
                 destSet = true;
                 Debug.DrawLine(transform.position, destination);
-                if (CompanionBT.speed <= 5) animator.SetBool("walking", true);
-                else if (CompanionBT.speed > 5) animator.SetBool("running", true);
+                if (CompanionBT.speed <= 5) animator.SetBool("walking", true); //CompanionBT.isWalking = true;
+                else if (CompanionBT.speed > 5) animator.SetBool("running", true); //CompanionBT.isRunning = true;
                 transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
                 transform.LookAt(destination);
             }
         }
-        else { animator.SetBool("walking", false); animator.SetBool("running", false); destSet = false; Debug.Log("Following else"); }
+        else 
+        {
+            animator.SetBool("walking", false);
+            animator.SetBool("running", false);
+            //CompanionBT.isWalking = false;
+            //CompanionBT.isRunning = false;
+            //CompanionBT.isIdle = true;
+            destSet = false; Debug.Log("Following else");
+        }
 
         state = NodeState.RUNNING;
         return state; 

@@ -28,6 +28,7 @@ public class TaskShootBow : Node
         Debug.Log("Comp shooting bow...");
         animator.SetBool("walking", false);
         animator.SetBool("running", false);
+        animator.SetTrigger("shootBow");
 
         Transform target = (Transform)GetData("target");
         var targetTransform = target.GetComponent<TargetTransform>();
@@ -44,10 +45,8 @@ public class TaskShootBow : Node
         {
             Debug.Log("Bow shot");
             animator.SetBool("walking", false);
-            animator.SetBool("running", false);
-            animator.SetTrigger("shootBow");
+            animator.SetBool("running", false);            
             projectile.ShootProjectile();
-
             attackCounter = 0f;
         }        
 

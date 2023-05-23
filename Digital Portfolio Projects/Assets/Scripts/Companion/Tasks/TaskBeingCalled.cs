@@ -37,9 +37,18 @@ public class TaskBeingCalled : Node
 
         if (Vector3.Distance(transform.position, playerTransform.position) > 3f)
         {
-            transform.LookAt(destination);
-            transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
-            animator.SetBool("walking", true);
+            if (Vector3.Distance(transform.position, playerTransform.position) > 8f)
+            {
+                transform.LookAt(destination);
+                transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime * 1.9f);
+                animator.SetBool("running", true);
+            }
+            else
+            {
+                transform.LookAt(destination);
+                transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
+                animator.SetBool("walking", true);
+            }
         }
         else playerObject.GetComponent<Player>().isCalled = false;
 

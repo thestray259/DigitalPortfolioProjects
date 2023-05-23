@@ -19,6 +19,13 @@ public class CompanionBT : BTree
     public static float minRangedAttack = 10f;
     public static float maxRangedAttack = 15f;
 
+    public static bool isIdle = false;
+    public static bool isWalking = false;
+    public static bool isRunning = false;
+    public static bool isPunching = false;
+    public static bool isHit = false;
+    public static bool isDead = false;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
@@ -31,7 +38,7 @@ public class CompanionBT : BTree
             new Sequence(new List<Node>
             {
                 new CheckCanHeal(transform),
-                new CheckPlayerHealth(transform, playerObject), 
+                new CheckPlayerHealth(transform, playerObject),
                 new TaskHealPlayer(transform, playerObject)
             }),
             new Sequence(new List<Node> {
@@ -40,7 +47,7 @@ public class CompanionBT : BTree
             }),
             new Sequence(new List<Node>
             {
-                new CheckEnemyInAttackRange(transform), 
+                new CheckEnemyInAttackRange(transform),
                 new TaskAttackEnemy(transform)
             }),
             new Sequence(new List<Node>

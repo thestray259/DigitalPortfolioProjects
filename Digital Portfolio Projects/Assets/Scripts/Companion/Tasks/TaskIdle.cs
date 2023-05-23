@@ -50,6 +50,7 @@ public class TaskIdle : Node
             transform.LookAt(destination);
             transform.position = Vector3.MoveTowards(transform.position, destination, CompanionBT.speed * Time.deltaTime);
             animator.SetBool("walking", true);
+            //CompanionBT.isWalking = true;
         }
 
         if (destSet == true && (transform.position == destination || (transform.position.x >= destMin.x && transform.position.x <= destMax.x &&
@@ -59,6 +60,8 @@ public class TaskIdle : Node
             timer = 3.0f;
             destSet = false;
             animator.SetBool("walking", false);
+            //CompanionBT.isWalking = false;
+            //CompanionBT.isIdle = true;
             destination = new Vector3();
         }
 
